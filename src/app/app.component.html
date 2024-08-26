@@ -12,8 +12,9 @@
       <br />
       The button was clicked {{clicked}} times. 
       <br/>
-      <input [value]="clicked"  />
-
+      <!-- <input [value]= "clicked"  /> -->
+      <!-- <input [(ngModel)] = "clicked" /> -->
+      <input [(ngModel)] = "clicked" type="number" />
 </div>
 
 <div class="spaced">
@@ -23,6 +24,10 @@
       <br />
       The button was double clicked {{doubleClicked}} times. 
       
+</div>
+
+<div *ngIf= "willShowBlock">
+     This is the conditionally displayed block
 </div>
 
 <div class="spaced"></div>

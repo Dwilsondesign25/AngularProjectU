@@ -12,6 +12,8 @@ export class AppComponent {
   clicked: number = 0;
   doubleClicked: number = 0;
 
+  // willShowBlock: boolean = true;
+     willShowBlock: boolean = false;
   
     incrementClicked(){
       this.clicked += 1;
