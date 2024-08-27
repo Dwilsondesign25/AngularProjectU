@@ -14,6 +14,15 @@ export class AppComponent {
 
   // willShowBlock: boolean = true;
      willShowBlock: boolean = false;
+
+     willContextMenuShow: boolean = false;
+
+     valuesToLoopThrough: number[] = [
+      4, 
+      2,
+      5,
+      8,
+     ];
   
     incrementClicked(){
       this.clicked += 1;
