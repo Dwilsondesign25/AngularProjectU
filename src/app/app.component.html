@@ -44,10 +44,11 @@
       (contextmenu)= "toggleConextMenu(true, $event)">
 </div>
 
-<div *ngIf= "contextMenuInfo" 
+<div *ngIf= "contextMenuInfo.willContextMenuShow" 
       class="context-menu"
       [style.left.px] = "contextMenuInfo.pageX"
-      [style.top.px] = "contextMenuInfo.pageY">
+      [style.top.px] = "contextMenuInfo.pageY"
+      (click)="contextClick()">
       This is the context menu
 </div>
 

@@ -15,8 +15,6 @@ export class AppComponent {
   // willShowBlock: boolean = true;
      willShowBlock: boolean = false;
 
-     willContextMenuShow: boolean = false;
-
      contextMenuInfo: any = {
       pageX: 0,
       pageY: 0,
@@ -44,15 +42,20 @@ export class AppComponent {
     toggleConextMenu(showContextMenu: boolean, event: MouseEvent | null = null) {
       console.log(event);
       if (event !== null){
+        event.preventDefault();
       this.contextMenuInfo.pageX = event.pageX;
       this.contextMenuInfo.pageY = event.pageY;
       }
-      this.willContextMenuShow = showContextMenu;
+      this.contextMenuInfo.willContextMenuShow = showContextMenu;
     }
 
     @HostListener("document:click")
     closeContextMenu(){
-      this.toggleConextMenu(false);
+      setTimeout(() => {
+        if (!this.contextClicked){
+          this.toggleConextMenu(false);
+        }
+      }, 10)
     }
 
     contextClick(){
