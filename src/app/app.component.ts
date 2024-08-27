@@ -17,6 +17,12 @@ export class AppComponent {
 
      willContextMenuShow: boolean = false;
 
+     contextMenuInfo: any = {
+      pageX: 0,
+      pageY: 0,
+      willContextMenuShow: false, 
+     }
+
      valuesToLoopThrough: number[] = [
       4, 
       2,
@@ -30,6 +36,13 @@ export class AppComponent {
 
     incrementDoubleClicked(){
       this.doubleClicked += 1;
+    }
+
+    toggleConextMenu(showContextMenu: boolean, event: MouseEvent){
+      console.log(event);
+      this.contextMenuInfo.pageX = event.pageX;
+      this.contextMenuInfo.pageY = event.pageY;
+      this.willContextMenuShow = showContextMenu;
     }
 
   

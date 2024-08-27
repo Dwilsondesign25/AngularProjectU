@@ -39,7 +39,21 @@
             <br/>
             {{number}}, {{indexOut}}
       </div>
+
+<div class="block-of-color"
+      (contextmenu)= "toggleConextMenu(true, $event)">
 </div>
+
+<div *ngIf= "willContextMenuShow" 
+      class="context-menu"
+      [style.left.px] = "contextMenuInfo.pageX"
+      [style.top.px] = "contextMenuInfo.pageY">
+      This is the context menu
+</div>
+
+</div>
+
+
 
 <div class="spaced"></div>
 <app-users></app-users>
