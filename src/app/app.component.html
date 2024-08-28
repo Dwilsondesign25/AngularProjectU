@@ -41,15 +41,25 @@
       </div>
 
 <div class="block-of-color"
-      (contextmenu)= "toggleConextMenu(true, $event)">
+      (contextmenu)= "toggleConextMenu(true, $event)"
+      (mouseenter)= "onMouseMove (true, $event)"
+      (mouseleave)= "onMouseMove (false, $event)"
+      (mousemove)= "onMouseMove (true, $event)">
 </div>
 
 <div *ngIf= "contextMenuInfo.willShow" 
       class="context-menu"
       [style.left.px] = "contextMenuInfo.pageX"
       [style.top.px] = "contextMenuInfo.pageY"
-      (click)="contextClick()">
+      (click)= "contextClick()">
       This is the context menu
+</div>
+
+<div *ngIf= "tooltipInfo.willShow" 
+      class="context-menu"
+      [style.left.px] = "tooltipInfo.pageX"
+      [style.top.px] = "tooltipInfo.pageY !== 0 ? tooltipInfo.pageY : 300">
+      This is the tooltip
 </div>
 
 </div>

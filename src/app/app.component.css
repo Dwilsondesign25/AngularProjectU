@@ -9,8 +9,10 @@
 }
 
 .context-menu {
+    font-weight: bold;
+    color: rgb(235, 106, 235);
     position: absolute; 
     border: black solid 1px;
-    background-color: rgb(202, 201, 201);
+    background-color: rgb(20, 66, 12);
 
 }

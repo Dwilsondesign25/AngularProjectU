@@ -73,5 +73,6 @@ export class AppComponent {
 
     onMouseMove(inside: boolean, event: MouseEvent){
       this.tooltipInfo.willShow = inside;
+      console.log(event);
     }
 }
