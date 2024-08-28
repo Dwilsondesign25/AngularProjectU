@@ -18,9 +18,15 @@ export class AppComponent {
      contextMenuInfo: any = {
       pageX: 0,
       pageY: 0,
-      willContextMenuShow: false, 
+      willShow: false, 
      }
 
+     tooltipInfo: any = {
+      pageX: 0,
+      pageY: 0,
+      willShow: false, 
+     }
+     
      contextClicked:boolean = false;
 
 
@@ -46,7 +52,7 @@ export class AppComponent {
       this.contextMenuInfo.pageX = event.pageX;
       this.contextMenuInfo.pageY = event.pageY;
       }
-      this.contextMenuInfo.willContextMenuShow = showContextMenu;
+      this.contextMenuInfo.willShow = showContextMenu;
     }
 
     @HostListener("document:click")
@@ -63,5 +69,9 @@ export class AppComponent {
       setTimeout(() => {
         this.contextClicked = false;
       }, 20)
+    }
+
+    onMouseMove(inside: boolean, event: MouseEvent){
+      this.tooltipInfo.willShow = inside;
     }
 }

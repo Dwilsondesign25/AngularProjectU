@@ -44,7 +44,7 @@
       (contextmenu)= "toggleConextMenu(true, $event)">
 </div>
 
-<div *ngIf= "contextMenuInfo.willContextMenuShow" 
+<div *ngIf= "contextMenuInfo.willShow" 
       class="context-menu"
       [style.left.px] = "contextMenuInfo.pageX"
       [style.top.px] = "contextMenuInfo.pageY"
