@@ -25,3 +25,8 @@
     background-color: rgb(30, 117, 112);
 
 }
+
+.tooltip-color {
+    background-color: purple;
+    cursor: pointer;
+}

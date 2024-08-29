@@ -41,6 +41,7 @@
       </div>
 
 <div class="block-of-color"
+      [ngClass]= "tooltipInfo.willShow ? 'tooltip-color' : '' "
       (contextmenu)= "toggleConextMenu(true, $event)"
       (mouseenter)= "onMouseMove (true, $event)"
       (mouseleave)= "onMouseMove (false, $event)"
