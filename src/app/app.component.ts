@@ -72,6 +72,11 @@ export class AppComponent {
     }
 
     onMouseMove(inside: boolean, event: MouseEvent){
+      if (this.tooltipInfo.willShow !== inside) {
+        this.tooltipInfo.willShow = inside;
+      }
+      this.tooltipInfo.pageX = event.pageX - 50;
+      this.tooltipInfo.pageY = event.pageY + 15;
       this.tooltipInfo.willShow = inside;
       console.log(event);
     }
