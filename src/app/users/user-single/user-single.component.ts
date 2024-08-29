@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './user-single.component.css'
 })
 export class UserSingleComponent {
-  @Input() user: string 
+  @Input() user: string = "x"; 
 }
