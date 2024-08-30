@@ -1,4 +1,8 @@
-<p>users works!</p>
-<div *ngFor= "let user of userList">
-<app-user-single [user] ="user"></app-user-single>
-</div>
+<ol>
+    <li *ngFor="let user of userList; let userIndex = index">
+    <app-user-single [user] ="user" 
+    [userIndex]= "userIndex" 
+    (deleteUser)= "removeUser($event)"></app-user-single>
+    </li>
+</ol>
+

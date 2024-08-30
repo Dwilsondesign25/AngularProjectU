@@ -34,7 +34,12 @@ export class UsersComponent {
     "Julissa Bandey",
     "Merridie McPartling",
     "Nanete Kitlee"        
-  ]
+  ];
+
+    removeUser(index: number){
+      this.userList.splice(index, 1);
+    
+    } 
 
 
 

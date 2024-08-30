@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-user-single',
@@ -6,5 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './user-single.component.css'
 })
 export class UserSingleComponent {
-  @Input() user: string = "x"; 
+  @Input() user: string = ""; 
+  @Input() userIndex: number = -1; 
+  @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
+
 }
