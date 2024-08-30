@@ -1,2 +1,4 @@
 <p>users works!</p>
-<app-user-single user="Some Random Name"></app-user-single>
+<div *ngFor= "let user of userList">
+<app-user-single [user] ="user"></app-user-single>
+</div>
