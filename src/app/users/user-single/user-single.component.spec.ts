@@ -21,3 +21,4 @@ describe('UserSingleComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-users',
@@ -38,11 +39,11 @@ export class UsersComponent {
 
 
     constructor(
-      
+      public userService: UserService
     ) {}
     
     removeUser(index: number){
-      this.userList.splice(index, 1);
+      this.userService.userList.splice(index, 1);
     
     } 
 
