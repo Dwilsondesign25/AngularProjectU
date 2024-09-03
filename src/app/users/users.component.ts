@@ -42,10 +42,10 @@ export class UsersComponent {
       public userService: UserService
     ) {}
     
-    removeUser(index: number){
-      this.userService.userList.splice(index, 1);
+    // removeUser(index: number){
+    //   this.userService.userList.splice(index, 1);
     
-    } 
+    // } 
 
 
 
