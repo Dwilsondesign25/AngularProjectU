@@ -32,11 +32,11 @@ export class UserService {
       ];
 
       removeUser(index: number){
-        this.userList.splice(index, 1);
-
-      editUser(fullName: String, index: number){
-        this.userList[index] = fullName;
+          this.userList.splice(index, 1);
+      }
+      
+      editUser(fullName: string, index: number){
+          this.userList[index] = fullName;
       }
       
       } 
-}
