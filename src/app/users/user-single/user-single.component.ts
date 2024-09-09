@@ -13,7 +13,7 @@ export class UserSingleComponent implements OnInit {
   editMode: boolean = false;
   userForEdit: string = "";
   textColor: any = {
-      color: "black"
+      color: "white"
   };
   
   constructor(
