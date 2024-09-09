@@ -14,7 +14,7 @@ export class UserSingleComponent implements OnInit {
   userForEdit: string = "";
   textColor: any = {
       color: "white"
-  };
+  }
   
   constructor(
     public userService: UserService

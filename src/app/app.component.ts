@@ -1,4 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { UserService } from '../services/user-service.service'; 
+
+
 
 @Component({
   selector: 'app-root',
@@ -38,6 +41,15 @@ export class AppComponent {
       5,
       8,
      ];
+
+     constructor(
+       public userService: UserService
+     ){}
+
+     triggerColorChange() {
+      this.userService.colorHasChanged.next(); 
+    }
+    
   
     incrementClicked(){
       this.clicked += 1;

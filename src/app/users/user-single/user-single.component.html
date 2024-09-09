@@ -1,5 +1,5 @@
-<div *ngIf="!editMode" class="user-single-grid user-page-border"
-    [ngStyle]="textColor">
+<div *ngIf= "!editMode" class="user-single-grid user-page-border"
+    [ngStyle]= "textColor">
     {{userService.userList[userIndex]}}
 
     <button class="redButton" (click)="userService.removeUser(userIndex)">
@@ -9,14 +9,14 @@
         Edit
     </button>
 </div>
-<div *ngIf="editMode" class="user-single-grid user-page-border"
-    [ngStyle]="textColor">
-    <input [(ngModel)]="userForEdit"/>
-    <button (click)="toggleEdit(false)">
+<div *ngIf= "editMode" class="user-single-grid user-page-border"
+    [ngStyle]= "textColor">
+    <input [(ngModel)]= "userForEdit"/>
+    <button (click)= "toggleEdit(false)">
         Cancel
     </button>
     <!-- <button(click)="userService.editUser(this.userForEdit, this.userIndex)"> -->
-    <button (click)="submitEdit()">
+    <button (click)= "submitEdit()">
         Save
     </button>
 </div>
