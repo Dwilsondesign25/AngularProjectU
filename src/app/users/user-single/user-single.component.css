@@ -1,4 +1,16 @@
 .redButton {
-    background-color: red;
-    color: white;
+    background-color: rgb(255, 154, 154);
+    color: rgb(0, 0, 0);
+}
+
+.user-single-grid{
+    display: grid;
+    grid-template-columns: 60% 20% 20%;
+}
+
+.user-page-border {
+    border: black 1px solid;
+    background-color: rgb(200, 197, 197);
+    margin: 10px 0px 10px 0px;
+    padding: 10px;
 }

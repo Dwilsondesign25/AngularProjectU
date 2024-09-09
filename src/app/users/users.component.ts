@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user-service.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { UserService } from '../services/user-service.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css', '../app.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
   testUser = "Test User"
   // userList = [
   //   "Tucker Anselm",
@@ -44,6 +44,10 @@ export class UsersComponent implements OnInit {
 
     ngOnInit(): void {
       console.log("component has been initialized");
+    }
+
+    ngOnDestroy(): void {
+      console.log("component has been destroyed");
     }
     
     // removeUser(index: number){

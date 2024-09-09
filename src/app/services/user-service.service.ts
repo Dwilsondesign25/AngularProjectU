@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 
 @Injectable({providedIn: "root"})
 export class UserService {
+  colorHasChanged: Subject<void> = new Subject<void>(); 
+
     userList = [
         "Drew Wilson",
         "Elmira Keddy",

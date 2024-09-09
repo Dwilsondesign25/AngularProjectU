@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { UserService } from '../../services/user-service.service';
 
 @Component({
@@ -6,17 +6,25 @@ import { UserService } from '../../services/user-service.service';
   templateUrl: './user-single.component.html',
   styleUrl: './user-single.component.css'
 })
-export class UserSingleComponent {
+export class UserSingleComponent implements OnInit {
   // @Input() user: string = ""; 
   @Input() userIndex: number = -1; 
   // @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
   editMode: boolean = false;
   userForEdit: string = "";
-
+  textColor: any = {
+      color: "black"
+  };
   
   constructor(
     public userService: UserService
   ) {}
+
+  ngOnInit(): void {
+    this.userService.colorHasChanged.subscribe(() => {
+        this.textColor.color = "purple";
+    })
+  }
 
   toggleEdit(editMode: boolean, user: string =""){
     this.editMode = editMode;
