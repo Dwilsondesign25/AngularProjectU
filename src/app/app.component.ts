@@ -6,6 +6,8 @@ import { Component, HostListener } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  willShowUsers: boolean = false;
+
   title = 'ClientApp';
   helloWorld: string = "Hello World!";
   //string interpolation
@@ -79,5 +81,10 @@ export class AppComponent {
       this.tooltipInfo.pageY = event.pageY + 15;
       this.tooltipInfo.willShow = inside;
       console.log(event);
+      
+    }
+
+    setShowUsers(showUsers: boolean){
+      this.willShowUsers = showUsers;
     }
 }

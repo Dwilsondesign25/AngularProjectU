@@ -66,7 +66,7 @@
 </div> -->
 
 
-
-<div class="spaced">
+<button (click)="setShowUsers(!willShowUsers)">Toggle Show Users</button>
+<div class="spaced" *ngIf="willShowUsers">
       <app-users></app-users>
 </div>
