@@ -1,11 +1,11 @@
 <div *ngIf="!editMode">
     {{userService.userList[userIndex]}}
 
-    <button (click)="userService.removeUser(userIndex)">
-        Delete!
+    <button class="redButton" (click)="userService.removeUser(userIndex)">
+        Delete
     </button>
     <button (click)="toggleEdit(true, this.userService.userList[this.userIndex])">
-        Edit!
+        Edit
     </button>
 </div>
 <div *ngIf="editMode">
