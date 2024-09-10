@@ -43,12 +43,14 @@ export class AppComponent {
       8,
      ];
 
+     textColorForChange: string = "purple";
+
      constructor(
        public userService: UserService
      ){}
 
      triggerColorChange() {
-      this.userService.colorHasChanged.next(); 
+      this.userService.colorHasChanged.next(this.textColorForChange); 
     }
     
   

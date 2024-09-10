@@ -6,7 +6,7 @@ import { Subject } from "rxjs";
   providedIn: 'root'
 })
 export class UserService {
-  colorHasChanged: Subject<void> = new Subject<void>(); 
+  colorHasChanged: Subject<string> = new Subject<string>(); 
 
     userList = [
         "Drew Wilson",

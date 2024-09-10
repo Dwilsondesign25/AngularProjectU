@@ -67,7 +67,8 @@
 
 
 <button (click)="setShowUsers(!willShowUsers)">Toggle Show Users</button>
-<button (click)= "triggerColorChange()"> Change Color </button>
+<br/>
+<input [(ngModel)]="textColorForChange" type="color"/><button (click)= "triggerColorChange()"> Change Color </button>
 <div class="spaced" *ngIf="willShowUsers">
       <app-users></app-users>
 </div>
