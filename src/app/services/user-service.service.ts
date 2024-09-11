@@ -37,6 +37,14 @@ export class UserService {
         "Nanete Kitlee"        
       ];
 
+      constructor(
+        public userService: UserService
+      ) {}
+
+      getUsers(){
+        this
+      }
+
       removeUser(index: number){
           this.userList.splice(index, 1);
       }
