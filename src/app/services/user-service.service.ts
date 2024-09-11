@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
 
 @Injectable({
@@ -38,11 +39,11 @@ export class UserService {
       ];
 
       constructor(
-        public userService: UserService
+        public httpServ: HttpClient
       ) {}
 
       getUsers(){
-        this
+       return this.httpServ.get("http://localhost:3000/user/users")
       }
 
       removeUser(index: number){
