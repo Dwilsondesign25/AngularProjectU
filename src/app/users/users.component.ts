@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-users',
@@ -43,6 +44,14 @@ export class UsersComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
+      this.userService.getUsers().subscribe({
+        next: (res: any) => {
+          console.log(res);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err);
+        }
+      });
       console.log("component has been initialized");
     }
 
