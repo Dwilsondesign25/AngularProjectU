@@ -16,7 +16,7 @@ export class UserSingleComponent implements OnInit, OnDestroy {
   userForEdit!: User;
 
   textColor: any = {
-      color: "white"
+      color: "black",
   }
   colorHasChangedSubscription: Subscription = new Subscription();
 
