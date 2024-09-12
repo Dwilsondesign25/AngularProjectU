@@ -9,6 +9,7 @@ import { User } from "../models/User.model";
 })
 export class UserService {
   colorHasChanged: Subject<string> = new Subject<string>(); 
+  usersHaveChanged: Subject<void> = new Subject<void>(); 
   userList: User[]= [];
   emptyUser: User = {
     userId: 0,
@@ -58,14 +59,15 @@ export class UserService {
       }
 
       removeUser(index: number){
-          this.userList.splice(index, 1);
+          // this.userList.splice(index, 1);
       }
       
       editUser(user: User, index: number){
-          this.userList[index] = user;
+          // this.userList[index] = user;
           this.putUser(user).subscribe({
             next: () => {
               alert("User edited successfully!");
+              this.usersHaveChanged.next();
              },
             error: (err) => {
               alert("This user edit failed! Please try again later.");
@@ -76,5 +78,9 @@ export class UserService {
       putUser(userForEdit: User){
         return this.httpServ.put("http://localhost:3000/user/editUser", userForEdit)
        }
- 
+       
+      deleteUser(userId: User){
+        return this.httpServ.put("http://localhost:3000/user/deleteUser/" + userId)
+       }
+
     } 

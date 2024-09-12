@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../models/User.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -10,6 +11,7 @@ import { User } from '../models/User.model';
 })
 export class UsersComponent implements OnInit, OnDestroy {
   testUser = "Test User"
+  usersHaveChangedSubscription: Subscription = new Subscription();
   // userList = [
   //   "Tucker Anselm",
   //   "Elmira Keddy",
@@ -45,6 +47,14 @@ export class UsersComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
+      this.getUsers();
+      this.usersHaveChangedSubscription = this.userService.usersHaveChanged.subscribe(() => {
+        this.getUsers();
+      })
+      console.log("component has been initialized");
+    }
+
+    getUsers(){
       this.userService.getUsers().subscribe({
         next: (res: User[]) => {
           this.userService.userList = res;
@@ -55,13 +65,13 @@ export class UsersComponent implements OnInit, OnDestroy {
           //   console.log(res);
         },
         error: (err: HttpErrorResponse) => {
-          console.error(err);
+          console.log(err);
         }
       });
-      console.log("component has been initialized");
     }
     
     ngOnDestroy(): void {
+      this.usersHaveChangedSubscription.unsubscribe();  // unsubscribe to avoid memory leaks when component is destroyed   //   this.userService.usersHasChanged.unsubscribe();  // unsubscribe to avoid memory leaks when component is destroyed  //   this.userService.colorHasChanged.unsubscribe();  // unsubscribe to avoid memory leaks when component is destroyed  //   this.userService.colorHasChanged.unsubscribe();  // unsubscribe to avoid memory leaks when component is destroyed  //   this
       console.log("component has been destroyed");
     }
     
