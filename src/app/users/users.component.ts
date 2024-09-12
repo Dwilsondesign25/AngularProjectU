@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class UsersComponent implements OnInit, OnDestroy {
   testUser = "Test User"
   usersHaveChangedSubscription: Subscription = new Subscription();
+  addingNewUser: boolean = false;
   // userList = [
   //   "Tucker Anselm",
   //   "Elmira Keddy",
@@ -48,10 +49,19 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       this.getUsers();
-      this.usersHaveChangedSubscription = this.userService.usersHaveChanged.subscribe(() => {
+      this.usersHaveChangedSubscription = this.userService.usersHaveChanged
+      .subscribe((changesCancelled: boolean) => {
+        if (!changesCancelled) {
         this.getUsers();
+        }
+        this.addingNewUser = false;
       })
       console.log("component has been initialized");
+    }
+
+
+    addNewUser(){
+      this.addingNewUser = true;
     }
 
     getUsers(){

@@ -9,7 +9,7 @@ import { User } from "../models/User.model";
 })
 export class UserService {
   colorHasChanged: Subject<string> = new Subject<string>(); 
-  usersHaveChanged: Subject<void> = new Subject<void>(); 
+  usersHaveChanged: Subject<boolean> = new Subject<boolean>(); 
   userList: User[]= [];
   emptyUser: User = {
     userId: 0,
@@ -64,7 +64,7 @@ export class UserService {
             this.deleteUser(userId).subscribe({
               next: () => {
                 alert("The delete was successful!");
-                this.usersHaveChanged.next();
+                this.usersHaveChanged.next(false);
               },
               error: (err) => {
                 alert("This user delete edit failed! Please try again later.");
@@ -74,13 +74,13 @@ export class UserService {
       
       addUser(user: User, index: number){
         // this.userList[index] = user;
-        this.putUser(user).subscribe({
+        this.postUser(user).subscribe({
           next: () => {
-            alert("User edited successfully!");
-            this.usersHaveChanged.next();
+            alert("Adding a User edited successfully!");
+            this.usersHaveChanged.next(false);
            },
           error: (err) => {
-            alert("This user edit failed! Please try again later.");
+            alert("Adding the user failed! Please try again later.");
           }
         })
     }
@@ -91,7 +91,7 @@ export class UserService {
           this.putUser(user).subscribe({
             next: () => {
               alert("User edited successfully!");
-              this.usersHaveChanged.next();
+              this.usersHaveChanged.next(false);
              },
             error: (err) => {
               alert("This user edit failed! Please try again later.");
@@ -99,8 +99,8 @@ export class UserService {
           })
       }
 
-      postUser(userForEdit: User){
-        return this.httpServ.post("http://localhost:3000/user/editUser", userForEdit)
+      postUser(userForAdd: User){
+        return this.httpServ.post("http://localhost:3000/user/editUser", userForAdd)
        }
 
        putUser(userForEdit: User){
