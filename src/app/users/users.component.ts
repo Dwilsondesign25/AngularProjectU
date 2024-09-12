@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { User } from '../models/User.model';
 
 @Component({
   selector: 'app-users',
@@ -45,9 +46,14 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       this.userService.getUsers().subscribe({
-        next: (res: any) => {
-          console.log(res);
-        },
+        next: (res: User[]) => {
+          this.userService.userList = res;
+        //   console.log(this.userService.userList);
+        //   res.forEach((row: User) => {
+        //     console.log(row.username + "" + row.city);
+        //   })
+        //   console.log(res);
+        // },
         error: (err: HttpErrorResponse) => {
           console.error(err);
         }
