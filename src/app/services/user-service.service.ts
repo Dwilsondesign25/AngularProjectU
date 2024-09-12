@@ -58,8 +58,18 @@ export class UserService {
        return this.httpServ.get<User[]>("http://localhost:3000/user/users")
       }
 
-      removeUser(index: number){
+      removeUser(userId: number){
           // this.userList.splice(index, 1);
+          if (confirm("Are you sure you want to delete this user?"))
+            this.deleteUser(userId).subscribe({
+              next: () => {
+                alert("The delete was successful!");
+                this.usersHaveChanged.next();
+              },
+              error: (err) => {
+                alert("This user delete edit failed! Please try again later.");
+              }
+          })
       }
       
       editUser(user: User, index: number){
@@ -79,8 +89,8 @@ export class UserService {
         return this.httpServ.put("http://localhost:3000/user/editUser", userForEdit)
        }
        
-      deleteUser(userId: User){
-        return this.httpServ.put("http://localhost:3000/user/deleteUser/" + userId)
+      deleteUser(userId: Number){
+        return this.httpServ.delete("http://localhost:3000/user/deleteUser/" + userId)
        }
 
     } 

@@ -17,7 +17,7 @@
     
 
 
-    <button class="redButton" (click)="userService.removeUser(userIndex)">
+    <button class="redButton" (click)="userService.removeUser(userService.userList[userIndex].userId)">
         Delete
     </button>
     <button (click)="toggleEdit(true, this.userService.userList[this.userIndex])">
