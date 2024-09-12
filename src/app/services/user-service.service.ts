@@ -10,6 +10,15 @@ import { User } from "../models/User.model";
 export class UserService {
   colorHasChanged: Subject<string> = new Subject<string>(); 
   userList: User[]= [];
+  emptyUser: User = {
+    userId: 0,
+    username: "",
+    fullName: "",
+    city: "",
+    gender: "",
+    favoriteColor: "",
+    favoriteAnimal: "",
+  };
 
     // userList = [
     //     "Drew Wilson",
@@ -54,6 +63,18 @@ export class UserService {
       
       editUser(user: User, index: number){
           this.userList[index] = user;
+          this.putUser(user).subscribe({
+            next: () => {
+              alert("User edited successfully!");
+             },
+            error: (err) => {
+              alert("This user edit failed! Please try again later.");
+            }
+          })
       }
-      
-      } 
+
+      putUser(userForEdit: User){
+        return this.httpServ.put("http://localhost:3000/user/editUser", userForEdit)
+       }
+ 
+    } 
