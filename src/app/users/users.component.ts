@@ -48,28 +48,25 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.userService.getUsers().subscribe({
         next: (res: User[]) => {
           this.userService.userList = res;
-        //   console.log(this.userService.userList);
-        //   res.forEach((row: User) => {
-        //     console.log(row.username + "" + row.city);
-        //   })
-        //   console.log(res);
-        // },
+          //   console.log(this.userService.userList);
+          //   res.forEach((row: User) => {
+          //     console.log(row.username + "" + row.city);
+          //   });
+          //   console.log(res);
+        },
         error: (err: HttpErrorResponse) => {
           console.error(err);
         }
       });
       console.log("component has been initialized");
     }
-
+    
     ngOnDestroy(): void {
       console.log("component has been destroyed");
     }
     
-    // removeUser(index: number){
+    // removeUser(index: number) {
     //   this.userService.userList.splice(index, 1);
+    // }
     
-    // } 
-
-
-
-}
+  }
