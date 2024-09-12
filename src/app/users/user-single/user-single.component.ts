@@ -10,7 +10,8 @@ import { UserService } from '../../services/user-service.service';
 })
 export class UserSingleComponent implements OnInit, OnDestroy {
   // @Input() user: string = ""; 
-  @Input() userIndex: number = -1; 
+  @Input() addMode: boolean = false; 
+  @Input() userIndex: number = -1;
   // @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
   editMode: boolean = false;
   userForEdit!: User;
@@ -39,9 +40,15 @@ export class UserSingleComponent implements OnInit, OnDestroy {
   }
 
   submitEdit(){
+    if(this.addMode){
+
+    } else {
+
+    
     this.editMode = false;
     this.userService.editUser(this.userForEdit, this.userIndex);
   }
+}
 
   ngOnDestroy(): void {
     this.colorHasChangedSubscription.unsubscribe();

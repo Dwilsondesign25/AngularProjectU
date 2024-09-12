@@ -1,4 +1,4 @@
-<div *ngIf="!editMode" class="user-page-border"
+<div *ngIf="!editMode" && !addMode class="user-page-border"
     [ngStyle]="textColor">
     <div class="grid50">
         <div class="field-space">
@@ -64,7 +64,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="editMode" class="user-page-border"
+<form *ngIf="editMode || addMode" class="user-page-border" (ngSubmit)="submitEdit()"
     [ngStyle]="textColor">
     <div class="grid50">
         <div class="field-space">
@@ -72,7 +72,7 @@
                 Full Name: 
             </label>
             <div>
-                <input [(ngModel)]="userForEdit.fullName"/>
+                <input name="fullName" [(ngModel)]="userForEdit.fullName"/>
             </div>
         </div>
         <div class="field-space">
@@ -80,7 +80,7 @@
                 Username: 
             </label>
             <div>
-                <input [(ngModel)]="userForEdit.username"/>
+                <input name="username" [(ngModel)]="userForEdit.username"/>
             </div>
         </div>
         <div class="field-space">
@@ -88,7 +88,7 @@
                 City: 
             </label>
             <div>
-                <input [(ngModel)]="userForEdit.city"/>
+                <input name="city" [(ngModel)]="userForEdit.city"/>
             </div>
         </div>
         <div class="field-space">
@@ -96,6 +96,38 @@
                 Favorite Animal: 
             </label>
             <div>
-                <input [(ngModel)]="userForEdit.favoriteAnimal"/>
+                <input name="favoriteAnimal" [(ngModel)]="userForEdit.favoriteAnimal"/>
             </div>
         </div>
+        <div class="field-space">
+            <label class="bold-text">
+                Favorite Color: 
+            </label>
+            <div>
+                <input name="favoriteColor" [(ngModel)]="userForEdit.favoriteColor"/>
+            </div>
+        </div>
+        <div class="field-space">
+            <label class="bold-text">
+                Gender: 
+            </label>
+            <div>
+                <input name="gender" [(ngModel)]="userForEdit.gender"/>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="grid50">
+        <div></div>
+        <div class="grid50">
+            <button class="field-space" type="button" (click)="toggleEdit(false)">
+                Cancel
+            </button>
+            <button class="field-space" type="submit">
+                <!-- (click)="submitEdit()"> -->
+                Save
+            </button>
+        </div>
+    </div>
+</form>
