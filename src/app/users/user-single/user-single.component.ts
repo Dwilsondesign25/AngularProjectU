@@ -44,10 +44,10 @@ export class UserSingleComponent implements OnInit, OnDestroy {
 
   submitEdit() {
       if (this.addMode) {
-        this.userService.addUser(this.userForEdit, this.userIndex);
+        this.userService.addUser(this.userForEdit);
       } else {
           this.editMode = false;
-        this.userService.editUser(this.userForEdit, this.userIndex);
+        this.userService.editUser(this.userForEdit);
       }
   }
 

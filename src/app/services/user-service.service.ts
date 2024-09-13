@@ -72,11 +72,11 @@ export class UserService {
           })
       }
       
-      addUser(user: User, index: number){
+      addUser(user: User){
         // this.userList[index] = user;
         this.postUser(user).subscribe({
           next: () => {
-            alert("Adding a User edited successfully!");
+            alert("Adding a User was successfully!");
             this.usersHaveChanged.next(false);
            },
           error: (err) => {
@@ -86,7 +86,7 @@ export class UserService {
     }
 
 
-      editUser(user: User, index: number){
+      editUser(user: User){
           // this.userList[index] = user;
           this.putUser(user).subscribe({
             next: () => {
@@ -100,7 +100,7 @@ export class UserService {
       }
 
       postUser(userForAdd: User){
-        return this.httpServ.post("http://localhost:3000/user/editUser", userForAdd)
+        return this.httpServ.post("http://localhost:3000/user/addUser", userForAdd)
        }
 
        putUser(userForEdit: User){
