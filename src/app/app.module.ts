@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UserSingleComponent } from './users/user-single/user-single.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
