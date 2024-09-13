@@ -54,10 +54,13 @@ export class UserService {
         public httpServ: HttpClient
       ) {}
 
-      getUsers(){
-       return this.httpServ.get<User[]>("http://localhost:3000/user/users")
-      }
-
+      getUsers(searchText: string = "") {
+        if (searchText === "") {
+            return this.httpServ.get<User[]>("http://localhost:3000/user/users")
+        } else {
+            return this.httpServ.get<User[]>("http://localhost:3000/user/userSearch/" + searchText)
+        }
+    }
       removeUser(userId: number){
           // this.userList.splice(index, 1);
           if (confirm("Are you sure you want to delete this user?"))
