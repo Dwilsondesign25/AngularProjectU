@@ -51,16 +51,18 @@ constructor(
     }
 }
 
-  subscribeParams(params: any): void {
+subscribeParams() {
     this.route.params.subscribe(params => {
-        console.log(params ["user Id"]);  
-        if (params["userId"]) {
-        this.userId = +params["userId"];
-        this.getUserById();
-        this.usersHaveChangedSubscription = this.userService.usersHaveChanged.subscribe(() => this.getUserById());
+        console.log(params["userId"]);
+        if (params["userId"]){
+            this.userId = +params["userId"];
+            this.getUserById();
+            this.usersHaveChangedSubscription = this.userService.usersHaveChanged.subscribe(() => {
+                this.getUserById();
+            })
         }
-    });
-  }
+    })
+}
 
   getUserById(){
     if (this.userId > 0)
