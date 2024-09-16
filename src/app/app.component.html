@@ -36,8 +36,7 @@
 <div class="spaced">
       <div *ngFor= "let number of valuesToLoopThrough; let indexOut = index">
             Boilerplate, this is one of the numbers
-            <br/>
-            {{number}}, {{indexOut}}
+            <br/>  
       </div>
 
 <div class="block-of-color"
@@ -65,10 +64,15 @@
  
 </div> -->
 
-
+<!-- 
 <button (click)="setShowUsers(!willShowUsers)">Toggle Show Users</button>
-<br/>
-<input [(ngModel)]="textColorForChange" type="color"/><button (click)= "triggerColorChange()"> Change Color </button>
-<div class="spaced" *ngIf="willShowUsers">
+<br/> -->
+<!-- <input [(ngModel)]="textColorForChange" type="color"/><button (click)= "triggerColorChange()"> Change Color </button> -->
+<!-- <div class="spaced" *ngIf="willShowUsers">
       <app-users></app-users>
+</div> -->
+
+
+<div class="spaced">
+<router-outlet></router-outlet>
 </div>
