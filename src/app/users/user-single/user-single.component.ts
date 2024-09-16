@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, 
 import { Subscription } from 'rxjs';
 import { User } from '../../models/User.model';
 import { UserService } from '../../services/user-service.service';
+import { ActivatedRoute } from '@angular/router'; 
+
 
 
 @Component({
@@ -13,25 +15,47 @@ export class UserSingleComponent implements OnInit, OnDestroy {
   // @Input() user: string = "";
   @Input() addMode: boolean = false;
   @Input() userIndex: number = -1;
+  userId: number = -1;
   // @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
   editMode: boolean = false;
+  displayUser: boolean = false;
   userForEdit!: User;
+  userForDisplay!: User;
 
   textColor: any = {
       color: "black"
   }
   colorHasChangedSubscription: Subscription = new Subscription();
 
-  constructor(
-      public userService: UserService
-  ) { }
+constructor(
+    public userService: UserService,
+    private route: ActivatedRoute,
+) { }
 
   ngOnInit(): void {
       this.userForEdit = {...this.userService.emptyUser};
       this.colorHasChangedSubscription = this.userService.colorHasChanged.subscribe((newColor) => {
           console.log(newColor);
           this.textColor.color = newColor;
+          this.setUserForDisplay();
       })
+  }
+
+  setUserForDisplay() {
+    if (this.userIndex !== -1) {
+        this.userForDisplay = this.userService.userList[this.userIndex];
+        this.displayUser = true;
+    }
+}
+
+  subscribeParams(params: any): void {
+    this.route.params.subscribe(params => {
+        console.log(params ["user Id"]);  
+        if (params["userId"]) {
+        this.userId = params["userId"];
+        // this.displayUser = true;
+        }
+    });
   }
 
   toggleEdit(editMode: boolean, user: User = { ...this.userService.emptyUser }) {
