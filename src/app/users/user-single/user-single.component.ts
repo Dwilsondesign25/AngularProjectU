@@ -25,7 +25,10 @@ export class UserSingleComponent implements OnInit, OnDestroy {
   textColor: any = {
       color: "black"
   }
+
+
   colorHasChangedSubscription: Subscription = new Subscription();
+  usersHaveChangedSubscription: Subscription = new Subscription();
 
 constructor(
     public userService: UserService,
@@ -52,8 +55,26 @@ constructor(
     this.route.params.subscribe(params => {
         console.log(params ["user Id"]);  
         if (params["userId"]) {
-        this.userId = params["userId"];
-        // this.displayUser = true;
+        this.userId = +params["userId"];
+        this.getUserById();
+        this.usersHaveChangedSubscription = this.userService.usersHaveChanged.subscribe(() => this.getUserById());
+        }
+    });
+  }
+
+  getUserById(){
+    if (this.userId > 0)
+    this.userService.getSingleUser(this.userId).subscribe({
+        next: (res) =>{
+            if (res) {
+                this.userForDisplay = res;
+                this.displayUser = true;
+            }
+            this.userForDisplay = {...res};
+            this.displayUser = true;
+        },
+        error: (err) => {
+            console.log(err);
         }
     });
   }
@@ -77,5 +98,6 @@ constructor(
 
   ngOnDestroy(): void {
       this.colorHasChangedSubscription.unsubscribe();
+      this.usersHaveChangedSubscription.unsubscribe();
   }
 }
