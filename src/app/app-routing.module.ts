@@ -6,17 +6,22 @@ import { UserSingleComponent } from "./users/user-single/user-single.component";
 // Removed the import statement for AppRoutingModule
 
 
-    
+ //Routes are evaluated from top to bottom
+// When there is a match on more than 1 route, we will go to the one higher on the list
 const routes: Routes = [
-        {path: "", redirectTo: "login", pathMatch: "full"},
-        {path: "login", component: LoginComponent},
-        {path: "users", component: UsersComponent},
-        {path: "user/:userId", component: UserSingleComponent},
-        {path: "**", redirectTo: "login"},
-    ]
+    {path: "", redirectTo: "login", pathMatch: "full"},
+    {path: "login", component: LoginComponent},
+    {path: "user", children: [
+        {path: "", component: UsersComponent, pathMatch: "full"},
+        {path: ":userId", component: UserSingleComponent},
+    ]},
+    {path: "**", redirectTo: "login"}
+]
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes, {
+        scrollPositionRestoration: 'top'
+    })],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {}

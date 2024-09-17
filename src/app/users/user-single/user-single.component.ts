@@ -2,7 +2,8 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, 
 import { Subscription } from 'rxjs';
 import { User } from '../../models/User.model';
 import { UserService } from '../../services/user-service.service';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,6 +22,7 @@ export class UserSingleComponent implements OnInit, OnDestroy {
   displayUser: boolean = false;
   userForEdit!: User;
   userForDisplay!: User;
+  isSingleUser: boolean = false;
 
   textColor: any = {
       color: "black"
@@ -30,21 +32,31 @@ export class UserSingleComponent implements OnInit, OnDestroy {
   colorHasChangedSubscription: Subscription = new Subscription();
   usersHaveChangedSubscription: Subscription = new Subscription();
 
-constructor(
+  constructor(
     public userService: UserService,
     private route: ActivatedRoute,
+    private router: Router
 ) { }
 
-  ngOnInit(): void {
-      this.userForEdit = {...this.userService.emptyUser};
-      this.colorHasChangedSubscription = this.userService.colorHasChanged.subscribe((newColor) => {
-          console.log(newColor);
-          this.textColor.color = newColor;
-          this.setUserForDisplay();
-      })
-  }
+ngOnInit(): void {
+    this.colorHasChangedSubscription = this.userService.colorHasChanged.subscribe((newColor) => {
+        console.log(newColor);
+        this.textColor.color = newColor;
+    })
+    this.subscribeParams();
+    this.setUserForDisplay();
+}
 
-  setUserForDisplay() {
+goToSingleUser(userId: number) {
+    this.router.navigate(["user", userId])
+    // this.router.navigate(["user/" + userId])
+}
+
+goToUserList() {
+    this.router.navigate(["user"])
+}
+
+setUserForDisplay() {
     if (this.userIndex !== -1) {
         this.userForDisplay = this.userService.userList[this.userIndex];
         this.displayUser = true;
@@ -55,6 +67,7 @@ subscribeParams() {
     this.route.params.subscribe(params => {
         console.log(params["userId"]);
         if (params["userId"]){
+            this.isSingleUser = true;
             this.userId = +params["userId"];
             this.getUserById();
             this.usersHaveChangedSubscription = this.userService.usersHaveChanged.subscribe(() => {
@@ -64,42 +77,41 @@ subscribeParams() {
     })
 }
 
-  getUserById(){
-    if (this.userId > 0)
-    this.userService.getSingleUser(this.userId).subscribe({
-        next: (res) =>{
-            if (res) {
-                this.userForDisplay = res;
-                this.displayUser = true;
+getUserById() {
+    if (this.userId > 0) {
+        this.userService.getSingleUser(this.userId).subscribe({
+            next: (res) =>{
+                if (res) {
+                    this.userForDisplay = res;
+                    this.displayUser = true;
+                }
+            },
+            error: (err) =>{ 
+                console.log(err);
             }
-            this.userForDisplay = {...res};
-            this.displayUser = true;
-        },
-        error: (err) => {
-            console.log(err);
-        }
-    });
-  }
+        })
+    }
+}
 
-  toggleEdit(editMode: boolean, user: User = { ...this.userService.emptyUser }) {
-      this.editMode = editMode;
-      this.userForEdit = { ...user };
-      if (!editMode) {
-          this.userService.usersHaveChanged.next(true);
-      }
-  }
+toggleEdit(editMode: boolean, user: User = { ...this.userService.emptyUser }) {
+    this.editMode = editMode;
+    this.userForEdit = { ...user };
+    if (!editMode) {
+        this.userService.usersHaveChanged.next(true);
+    }
+}
 
-  submitEdit() {
-      if (this.addMode) {
+submitEdit() {
+    if (this.addMode) {
         this.userService.addUser(this.userForEdit);
-      } else {
-          this.editMode = false;
+    } else {
+        this.editMode = false;
         this.userService.editUser(this.userForEdit);
-      }
-  }
+    }
+}
 
-  ngOnDestroy(): void {
-      this.colorHasChangedSubscription.unsubscribe();
-      this.usersHaveChangedSubscription.unsubscribe();
-  }
+ngOnDestroy(): void {
+    this.colorHasChangedSubscription.unsubscribe();
+    this.usersHaveChangedSubscription.unsubscribe();
+}
 }

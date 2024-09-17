@@ -7,99 +7,96 @@ import { UserService } from './services/user-service.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  willShowUsers: boolean = false;
+  willShowUsers: boolean = true;
 
   title = 'ClientApp';
-  helloWorld: string = "Hello World!";
+  helloWorld: string = "Hello World";
   //string interpolation
   clicked: number = 0;
   doubleClicked: number = 0;
 
   // willShowBlock: boolean = true;
-     willShowBlock: boolean = false;
+  willShowBlock: boolean = false;
 
-     contextMenuInfo: any = {
+  contextMenuInfo: any = {
       pageX: 0,
       pageY: 0,
-      willShow: false, 
-     }
+      willShow: false
+  }
 
-     tooltipInfo: any = {
+  tooltipInfo: any = {
       pageX: 0,
       pageY: 0,
-      willShow: false, 
-     }
-     
-     contextClicked:boolean = false;
+      willShow: false
+  }
 
+  contextClicked: boolean = false;
 
-     valuesToLoopThrough: number[] = [
+  valuesToLoopThrough: number[] = [
       4, 
       2,
       5,
-      8,
-     ];
+      8
+  ];
 
-     textColorForChange: string = "purple";
+  textColorForChange: string = "purple";
 
-     constructor(
-       public userService: UserService
-     ){}
+  constructor(
+      public userService: UserService
+  ) {}
 
-     triggerColorChange() {
-      this.userService.colorHasChanged.next(this.textColorForChange); 
-    }
-    
-  
-    incrementClicked(){
+  triggerColorChange() {
+      this.userService.colorHasChanged.next(this.textColorForChange);
+  }
+
+  incrementClicked() {
       this.clicked += 1;
-    }
+  }
 
-    incrementDoubleClicked(){
+  incrementDoubleClicked() {
       this.doubleClicked += 1;
-    }
+  }
 
-    toggleConextMenu(showContextMenu: boolean, event: MouseEvent | null = null) {
+  toggleContextMenu(showContextMenu: boolean, event: MouseEvent | null = null) {
       console.log(event);
-      if (event !== null){
-        event.preventDefault();
-      this.contextMenuInfo.pageX = event.pageX;
-      this.contextMenuInfo.pageY = event.pageY;
+      if (event !== null) {
+          event.preventDefault();
+          this.contextMenuInfo.pageX = event.pageX
+          this.contextMenuInfo.pageY = event.pageY
       }
       this.contextMenuInfo.willShow = showContextMenu;
-    }
+  }
 
-    @HostListener("document:click")
-    closeContextMenu(){
+  @HostListener("document:click")
+  closeContextMenu(){
       setTimeout(() => {
-        if (!this.contextClicked){
-          this.toggleConextMenu(false);
-        }
+          if (!this.contextClicked){
+              this.toggleContextMenu(false);
+          }
       }, 10)
-    }
+  }
 
-    contextClick(){
+  contextClick() {
       this.contextClicked = true;
       setTimeout(() => {
-        this.contextClicked = false;
+          this.contextClicked = false;
       }, 20)
-    }
+  }
 
-    onMouseMove(inside: boolean, event: MouseEvent){
+  onMouseMove(inside: boolean, event: MouseEvent) {
       if (this.tooltipInfo.willShow !== inside) {
-        this.tooltipInfo.willShow = inside;
+          this.tooltipInfo.willShow = inside;
       }
       this.tooltipInfo.pageX = event.pageX - 50;
       this.tooltipInfo.pageY = event.pageY + 15;
-      this.tooltipInfo.willShow = inside;
       console.log(event);
-      
-    }
+  }
 
-    setShowUsers(showUsers: boolean){
+  setShowUsers(showUsers: boolean) {
       this.willShowUsers = showUsers;
-    }
+  }
+
 }

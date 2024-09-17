@@ -3,26 +3,23 @@ import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/User.model";
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: "root" })
 export class UserService {
-  colorHasChanged: Subject<string> = new Subject<string>(); 
-  usersHaveChanged: Subject<boolean> = new Subject<boolean>(); 
-  userList: User[]= [];
-  emptyUser: User = {
-    userId: 0,
-    username: "",
-    fullName: "",
-    city: "",
-    gender: "",
-    favoriteColor: "",
-    favoriteAnimal: "",
-  };
+    colorHasChanged: Subject<string> = new Subject<string>();
+    usersHaveChanged: Subject<boolean> = new Subject<boolean>();
+    userList: User[] = [];
+    emptyUser: User = {
+        userId: 0,
+        username: "",
+        fullName: "",
+        city: "",
+        gender: "",
+        favoriteColor: "",
+        favoriteAnimal: ""
+    };
 
     // userList = [
-    //     "Drew Wilson",
+    //     "Tucker Anselm",
     //     "Elmira Keddy",
     //     "Eveline Grandisson",
     //     "Berry Wildes",
@@ -30,7 +27,7 @@ export class UserService {
     //     "Harp Antonignetti",
     //     "Vite Playfair",
     //     "Noelle Dowears",
-    //     "Dunoggota Lubbock",
+    //     "Delcine Lubbock",
     //     "Auberta Skerrett",
     //     "Constantin Cosgry",
     //     "Loleta Grenfell",
@@ -47,14 +44,14 @@ export class UserService {
     //     "Ashlee Amoore",
     //     "Julissa Bandey",
     //     "Merridie McPartling",
-    //     "Nanete Kitlee"        
-      // ];
+    //     "Nanete Kitlee"
+    // ];
 
-      constructor(
+    constructor(
         public httpServ: HttpClient
-      ) {}
+    ) {}
 
-      getUsers(searchText: string = "") {
+    getUsers(searchText: string = "") {
         if (searchText === "") {
             return this.httpServ.get<User[]>("http://localhost:3000/user/users")
         } else {
@@ -63,63 +60,61 @@ export class UserService {
     }
 
     getSingleUser(userId: number) {
-      return this.httpServ.get<User>("http://localhost:3000/user/userSingle/" + userId)
-    
+        return this.httpServ.get<User>("http://localhost:3000/user/userSingle/" + userId)
     }
 
-
-
-      removeUser(userId: number){
-          // this.userList.splice(index, 1);
-          if (confirm("Are you sure you want to delete this user?"))
+    removeUser(userId: number) {
+        // this.userList.splice(index, 1);
+        if (confirm("Are you sure you want to delete this user?")) {
             this.deleteUser(userId).subscribe({
-              next: () => {
-                alert("The delete was successful!");
-                this.usersHaveChanged.next(false);
-              },
-              error: (err) => {
-                alert("This user delete edit failed! Please try again later.");
-              }
-          })
-      }
-      
-      addUser(user: User){
-        // this.userList[index] = user;
+                next: () =>{
+                    alert("The delete was successful!");
+                    this.usersHaveChanged.next(false);
+                },
+                error: (err) =>{
+                    console.log(err);
+                    alert("The user delete failed! Please try again later.");
+                }
+            })
+        }
+    }
+
+    addUser(user: User) {
         this.postUser(user).subscribe({
-          next: () => {
-            alert("Adding a User was successfully!");
-            this.usersHaveChanged.next(false);
-           },
-          error: (err) => {
-            alert("Adding the user failed! Please try again later.");
-          }
+            next: () =>{
+                alert("Adding a user was successful!");
+                this.usersHaveChanged.next(false);
+            },
+            error: (err) =>{
+                console.log(err);
+                alert("Adding the user failed! Please try again later.");
+            }
         })
     }
 
-
-      editUser(user: User){
-          // this.userList[index] = user;
-          this.putUser(user).subscribe({
-            next: () => {
-              alert("User edited successfully!");
-              this.usersHaveChanged.next(false);
-             },
-            error: (err) => {
-              alert("This user edit failed! Please try again later.");
+    editUser(user: User) {
+        // this.userList[index] = user;
+        this.putUser(user).subscribe({
+            next: () =>{
+                alert("The edit was successful!");
+                this.usersHaveChanged.next(false);
+            },
+            error: (err) =>{
+                console.log(err);
+                alert("The user edit failed! Please try again later.");
             }
-          })
-      }
+        })
+    }
 
-      postUser(userForAdd: User){
+    postUser(userForAdd: User) {
         return this.httpServ.post("http://localhost:3000/user/addUser", userForAdd)
-       }
+    }
 
-       putUser(userForEdit: User){
+    putUser(userForEdit: User) {
         return this.httpServ.put("http://localhost:3000/user/editUser", userForEdit)
-       }
-       
-      deleteUser(userId: Number){
-        return this.httpServ.delete("http://localhost:3000/user/deleteUser/" + userId)
-       }
+    }
 
-    } 
+    deleteUser(userId: number) {
+        return this.httpServ.delete("http://localhost:3000/user/deleteUser/" + userId)
+    }
+}
