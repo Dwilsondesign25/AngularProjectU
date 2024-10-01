@@ -2,8 +2,18 @@
     <button (click)="goToUserList()">
         Go Back To List
     </button>
+@switch (userForDisplay.username) {
+    @case ("pbertelmot0"){
+        This is the first ever user in the app!
+    }
+    @case ("qtregent6"){
+        This is the first user named Quinn! 
+    }
+    @default {
+        There is nothing special about this user
+        }
+    }
 }
-
 <!-- Removed incomplete @case block -->
 <!-- <div *ngIf="isSingleUser">
     <button (click)="goToUserList()">
