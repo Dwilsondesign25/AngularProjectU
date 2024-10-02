@@ -1,16 +1,38 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { User } from "../models/User.model";
+import { Registration } from "../models/Registration.model";
+import { Login } from "../models/Login.Model";
+import { TokenResponse } from "../models/TokenResponse.model";
 
 @Injectable({ providedIn: "root" })
-export class UserService {
+export class AuthService {
+    emptyLogin: Login = {
+        username: "",
+        password: ""
+    }
+    emptyRegistration: Registration = {
+        username: "",
+        password: "",
+        passwordConfirm: "",
+        fullName: "",
+        city: "",
+        gender: "",
+        favoriteColor: "",
+        favoriteAnimal: "",
+    }
+
 
     constructor(
         public httpServ: HttpClient
     ) {}
-    postUser(userForAdd: User) {
-        return this.httpServ.post("http://localhost:3000/user/addUser", userForAdd)
+    postRegistration(userForRegister: Registration) {
+        return this.httpServ.post("http://localhost:3000/auth/register", userForRegister)
     }
+    postLogin(userForLogin: Login) {
+        return this.httpServ.post<TokenResponse>("http://localhost:3000/auth/login", userForLogin)
+    }
+   getRefreshToken() {
+    return this.httpServ.get<TokenResponse>("http://localhost:3000/auth/refreshToken")
 
+    }
 }
