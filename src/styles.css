@@ -18,3 +18,10 @@
 .field-space {
     margin: 7px 17px 7px 17px;
 }
+
+.user-page-border {
+  border: black 1px solid;
+  background-color: rgb(200, 197, 197);
+  margin: 10px 0px 10px 0px;
+  padding: 10px;
+}
