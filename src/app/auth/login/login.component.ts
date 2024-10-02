@@ -27,7 +27,10 @@ export class LoginComponent {
   submitLogin(){
     this.authServ.postLogin(this.login).subscribe({
       next: (res: TokenResponse) => {
-        console.log(res);
+        // console.log(res);
+        this.authServ.handleLogin(res.token).then(() => {
+          this.router.navigate(["user"]);
+        });
       },
       error: (err: any) => {
         console.log(err);
