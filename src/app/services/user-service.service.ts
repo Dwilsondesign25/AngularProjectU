@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/User.model";
+import { AuthService } from "./auth-service.service";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -48,12 +49,20 @@ export class UserService {
     // ];
 
     constructor(
-        public httpServ: HttpClient
+        private httpServ: HttpClient,
+        private authServ: AuthService
     ) {}
 
     getUsers(searchText: string = "") {
         if (searchText === "") {
-            return this.httpServ.get<User[]>("http://localhost:3000/user/users")
+            return this.httpServ.get<User[]>(
+                "http://localhost:3000/user/users",
+                {
+                    headers: {
+                        "Authorization": "Bearer " + this.authServ.token
+                    }
+                }
+            )
         } else {
             return this.httpServ.get<User[]>("http://localhost:3000/user/userSearch/" + searchText)
         }
