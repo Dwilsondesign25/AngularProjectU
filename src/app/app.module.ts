@@ -8,6 +8,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 // Import the HttpClientModule and provide the HttpClient interceptor
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
     UsersComponent,
     UserSingleComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

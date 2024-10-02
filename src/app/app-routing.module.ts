@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from "./auth/login/login.component";
 import { UsersComponent } from "./users/users.component";
 import { UserSingleComponent } from "./users/user-single/user-single.component";
+import { RegisterComponent } from "./auth/register/register.component";
 // Removed the import statement for AppRoutingModule
 
 
@@ -11,6 +12,7 @@ import { UserSingleComponent } from "./users/user-single/user-single.component";
 const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: "full"},
     {path: "login", component: LoginComponent},
+    {path: "register", component: RegisterComponent},
     {path: "user", children: [
         {path: "", component: UsersComponent, pathMatch: "full"},
         {path: ":userId", component: UserSingleComponent},

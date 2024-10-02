@@ -5,6 +5,12 @@
  
 }
 
+.grid25 {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+ 
+}
+
 .bold-text {
     font-weight: 600; 
 }

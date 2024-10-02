@@ -1,0 +1,78 @@
+<form class="user-page-border" (ngSubmit)="submitRegistration()">
+<div class="grid50">
+    <div class="field-space">
+        <label class="bold-text">
+            Full Name: 
+        </label>
+        <div>
+            <input name="fullName" [(ngModel)]="registration.fullName"/>
+        </div>
+    </div>
+    <div class="field-space">
+        <label class="bold-text">
+            Password: 
+        </label>
+        <div>
+            <input name="password" type="password" [(ngModel)]="registration.password"/>
+        </div>
+    </div>
+    <div class="field-space">
+        <label class="bold-text">
+            Username: 
+        </label>
+        <div>
+            <input name="username" [(ngModel)]="registration.username"/>
+        </div>
+    </div>
+    <div class="field-space">
+        <label class="bold-text">
+            Password Cofirm: 
+        </label>
+        <div>
+            <input name="password" type="passwordConfirm" [(ngModel)]="registration.passwordConfirm"/>
+        </div>
+    </div>
+    <div class="field-space">
+        <label class="bold-text">
+            City: 
+        </label>
+        <div>
+            <input name="city" [(ngModel)]="registration.city"/>
+        </div>
+    </div>
+    <div class="field-space">
+        <label class="bold-text">
+            Favorite Animal: 
+        </label>
+        <div>
+            <input name="favoriteAnimal" [(ngModel)]="registration.favoriteAnimal"/>
+        </div>
+    </div>
+    <div class="field-space">
+        <label class="bold-text">
+            Favorite Color: 
+        </label>
+        <div>
+            <input name="favoriteColor" [(ngModel)]="registration.favoriteColor"/>
+        </div>
+    </div>
+    <div class="field-space">
+        <label class="bold-text">
+            Gender: 
+        </label>
+        <div>
+            <input name="gender" [(ngModel)]="registration.gender"/>
+        </div>
+    </div>
+
+</div>
+
+<div class="grid25">
+    <div></div>
+    <div></div>
+    <div></div>
+        <button class="field-space" type="submit">
+            Register
+        </button>
+    </div>
+</form>
