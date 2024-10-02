@@ -11,8 +11,9 @@ export class LoginComponent {
     public router: Router,
   ){}
 
-  goToRegistration(){
-    this.router.navigate(['/register']);
+  goToRegistration(event: Event){
+    event.preventDefault();
+    this.router.navigate(['register']);
   }
 
 }

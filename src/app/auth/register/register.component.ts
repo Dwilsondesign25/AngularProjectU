@@ -24,7 +24,11 @@ export class RegisterComponent {
         },
         error: (err) =>{
             console.log(err);
+            if (err?.error?.message === "User with username already exists!") {
+              alert(err.error.message);
+            } else {
             alert("There was an error processing your registration!");
+          }
         }
     })
   }
