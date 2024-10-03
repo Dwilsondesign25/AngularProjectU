@@ -58,6 +58,7 @@ export class AppComponent implements OnInit{
 checkAuth(){
     let token = localStorage.getItem("token");
     if (token){
+        this.authService.isAuthenticated = true;
         this.authService.token = token;
         this.authService.getRefreshToken().subscribe({
         next: (res: TokenResponse) => {
