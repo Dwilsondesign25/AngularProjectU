@@ -1,5 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { UserService } from './services/user-service.service';
+import { AuthService } from './services/auth-service.service';
+import { TokenResponse } from './models/TokenResponse.model';
 
 
 
@@ -9,7 +11,7 @@ import { UserService } from './services/user-service.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   willShowUsers: boolean = true;
 
   title = 'ClientApp';
@@ -45,8 +47,25 @@ export class AppComponent {
   textColorForChange: string = "purple";
 
   constructor(
-      public userService: UserService
+      public userService: UserService,
+      public authService: AuthService
   ) {}
+
+  ngOnInit(): void {
+    this.checkAuth();
+}
+
+checkAuth(){
+    let token = localStorage.getItem("token");
+    if (token){
+        this.authService.token = token;
+        this.authService.getRefreshToken().subscribe({
+        next: (res: TokenResponse) => {
+            this.authService.handleLogin(res.token);
+            }
+        })
+    }
+}
 
   triggerColorChange() {
       this.userService.colorHasChanged.next(this.textColorForChange);

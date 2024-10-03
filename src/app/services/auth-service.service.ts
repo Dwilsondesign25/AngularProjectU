@@ -36,6 +36,7 @@ token: string = "";
 
     handleLogin(token:string){
         return new Promise<void>(resolve=>{
+        localStorage.setItem("token", token);
         let tokenInfo: any = jwtDecode(token);
         // console.log(tokenInfo);
         this.favoriteColor = tokenInfo["favoriteColor"];
