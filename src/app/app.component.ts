@@ -69,6 +69,10 @@ checkAuth(){
         this.authService.getRefreshToken().subscribe({
         next: (res: TokenResponse) => {
             this.authService.handleLogin(res.token);
+            },
+        error: (err) => {
+                console.log(err);
+                this.authService.logout();
             }
         })
     }
