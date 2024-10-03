@@ -27,3 +27,11 @@
     background-color: purple;
     cursor: pointer;
 }
+
+.spaced-left{
+    margin-left: 15px;
+}
+
+.spaced-bottom{
+    margin-bottom: 15px;
+}

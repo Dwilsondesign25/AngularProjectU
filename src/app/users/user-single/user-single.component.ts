@@ -4,6 +4,7 @@ import { User } from '../../models/User.model';
 import { UserService } from '../../services/user-service.service';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth-service.service';
 
 
 
@@ -35,7 +36,8 @@ export class UserSingleComponent implements OnInit, OnDestroy {
   constructor(
     public userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public authService: AuthService,
 ) { }
 
 ngOnInit(): void {

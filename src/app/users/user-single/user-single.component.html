@@ -96,17 +96,19 @@
                 </div>
             </div>
             <!-- <div  *ngIf="isSingleUser" class="grid50"> -->
-            <div class="grid50">
-                <div></div>
+            @if(userForDisplay.userId === authService.userId){
                 <div class="grid50">
-                    <button class="field-space" (click)="userService.removeUser(userForDisplay.userId)">
+                    <div></div>
+                    <div class="grid50">
+                        <button class="field-space" (click)="userService.removeUser(userForDisplay.userId)">
                         Delete
-                    </button>
-                    <button class="field-space" (click)="toggleEdit(true, userForDisplay)">
+                        </button>
+                        <button class="field-space" (click)="toggleEdit(true, userForDisplay)">
                         Edit
                     </button>
                 </div>
             </div>
+            }
         }
     
     </div>

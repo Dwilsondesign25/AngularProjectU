@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { UserService } from './services/user-service.service';
 import { AuthService } from './services/auth-service.service';
 import { TokenResponse } from './models/TokenResponse.model';
+import { Router } from '@angular/router';
 
 
 
@@ -48,11 +49,16 @@ export class AppComponent implements OnInit{
 
   constructor(
       public userService: UserService,
-      public authService: AuthService
+      public authService: AuthService,
+      private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.checkAuth();
+}
+
+goToMyProfile(){
+    this.router.navigate(["user/", this.authService.userId]);
 }
 
 checkAuth(){
