@@ -55,14 +55,14 @@ export class UserService {
 
     getUsers(searchText: string = "") {
         if (searchText === "") {
-            return this.httpServ.get<User[]>("http://localhost:3000/user/users")
+            return this.httpServ.get<User[]>("user/users")
         } else {
-            return this.httpServ.get<User[]>("http://localhost:3000/user/userSearch/" + searchText)
+            return this.httpServ.get<User[]>("user/userSearch/" + searchText)
         }
     }
 
     getSingleUser(userId: number) {
-        return this.httpServ.get<User>("http://localhost:3000/user/userSingle/" + userId)
+        return this.httpServ.get<User>("user/userSingle/" + userId)
     }
 
     removeUser(userId: number) {
@@ -109,14 +109,14 @@ export class UserService {
     }
 
     postUser(userForAdd: User) {
-        return this.httpServ.post("http://localhost:3000/user/addUser", userForAdd)
+        return this.httpServ.post("user/addUser", userForAdd)
     }
 
     putUser(userForEdit: User) {
-        return this.httpServ.put("http://localhost:3000/user/editUser", userForEdit)
+        return this.httpServ.put("user/editUser", userForEdit)
     }
 
     deleteUser(userId: number) {
-        return this.httpServ.delete("http://localhost:3000/user/deleteUser/" + userId)
+        return this.httpServ.delete("user/deleteUser/" + userId)
     }
 }

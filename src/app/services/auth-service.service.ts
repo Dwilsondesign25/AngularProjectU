@@ -50,13 +50,13 @@ token: string = "";
 
 
     postRegistration(userForRegister: Registration) {
-        return this.httpServ.post("http://localhost:3000/auth/register", userForRegister)
+        return this.httpServ.post("auth/register", userForRegister)
     }
     postLogin(userForLogin: Login) {
-        return this.httpServ.post<TokenResponse>("http://localhost:3000/auth/login", userForLogin)
+        return this.httpServ.post<TokenResponse>("auth/login", userForLogin)
     }
    getRefreshToken() {
-    return this.httpServ.get<TokenResponse>("http://localhost:3000/auth/refreshToken")
+    return this.httpServ.get<TokenResponse>("auth/refreshToken")
 
     }
 }
