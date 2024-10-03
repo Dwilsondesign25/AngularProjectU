@@ -74,5 +74,8 @@
 
 
 <div class="spaced">
-<router-outlet></router-outlet>
+      @if (authService.isAuthenticated){
+      <button (click)="authService.logout()">Log Out</button>
+      }
+      <router-outlet></router-outlet>
 </div>

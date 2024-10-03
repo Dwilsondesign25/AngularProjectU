@@ -20,10 +20,10 @@ const routes: Routes = [
         {path: "user", children: [
             {path: "", component: UsersComponent, pathMatch: "full"},
             {path: ":userId", component: UserSingleComponent},
-        ]}
+        ]},
         {path: "**", redirectTo: "login"}
     ]},
-    {path: "**", redirectTo: "login"}
+    {path: "**", redirectTo: "login"},
 ]
 
 @NgModule({

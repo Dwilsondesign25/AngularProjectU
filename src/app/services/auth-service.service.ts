@@ -4,6 +4,7 @@ import { Registration } from "../models/Registration.model";
 import { Login } from "../models/Login.Model";
 import { TokenResponse } from "../models/TokenResponse.model";
 import { jwtDecode } from "jwt-decode";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -31,22 +32,35 @@ token: string = "";
 
 
     constructor(
-        public httpServ: HttpClient
+        public httpServ: HttpClient,
+        private router: Router,
     ) {}
 
     handleLogin(token:string){
         return new Promise<void>(resolve=>{
-        localStorage.setItem("token", token);
-        let tokenInfo: any = jwtDecode(token);
-        // console.log(tokenInfo);
-        this.favoriteColor = tokenInfo["favoriteColor"];
-        this.fullName = tokenInfo["fullName"];
-        this.userId = tokenInfo["userId"];
-        this.username = tokenInfo["username"];
-        this.token = token;
-        this.isAuthenticated = true;
-        resolve();
+            localStorage.setItem("token", token);
+            let tokenInfo: any = jwtDecode(token);
+            // console.log(tokenInfo);
+            this.favoriteColor = tokenInfo["favoriteColor"];
+            this.fullName = tokenInfo["fullName"];
+            this.userId = tokenInfo["userId"];
+            this.username = tokenInfo["username"];
+            this.token = token;
+            this.isAuthenticated = true;
+            resolve();
         })
+    }
+
+    logout(){
+        localStorage.setItem("token", "");
+
+        this.isAuthenticated = false;
+        this.favoriteColor = "";
+        this.fullName = "";
+        this.userId = 0;
+        this.username = "";
+        this.token = "";
+        this.router.navigate(["/login"]);
     }
 
 
