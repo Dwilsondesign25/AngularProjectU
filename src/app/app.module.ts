@@ -4,11 +4,12 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { FormsModule } from '@angular/forms';
 import { UserSingleComponent } from './users/user-single/user-single.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthInterceptor } from './architecture/AuthInterceptor.interceptor';
 
 
 // Import the HttpClientModule and provide the HttpClient interceptor
@@ -30,6 +31,11 @@ import { RegisterComponent } from './auth/register/register.component';
     RouterModule.forRoot([]) // Add the router module
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor, 
+      multi: true
+    },
     provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]

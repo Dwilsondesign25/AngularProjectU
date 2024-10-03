@@ -55,14 +55,7 @@ export class UserService {
 
     getUsers(searchText: string = "") {
         if (searchText === "") {
-            return this.httpServ.get<User[]>(
-                "http://localhost:3000/user/users",
-                {
-                    headers: {
-                        "Authorization": "Bearer " + this.authServ.token
-                    }
-                }
-            )
+            return this.httpServ.get<User[]>("http://localhost:3000/user/users")
         } else {
             return this.httpServ.get<User[]>("http://localhost:3000/user/userSearch/" + searchText)
         }
