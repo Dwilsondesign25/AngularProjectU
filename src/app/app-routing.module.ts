@@ -22,7 +22,7 @@ const routes: Routes = [
             {path: "", component: UsersComponent, pathMatch: "full"},
             {path: ":userId", component: UserSingleComponent},
         ]},
-        {path: "posts", component: PostsComponent}
+        {path: "posts", component: PostsComponent},
         {path: "**", redirectTo: "login"}
     ]},
     {path: "**", redirectTo: "login"},
