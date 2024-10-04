@@ -5,9 +5,11 @@ import { Login } from "../models/Login.Model";
 import { TokenResponse } from "../models/TokenResponse.model";
 import { jwtDecode } from "jwt-decode";
 import { Router } from "@angular/router";
+import { Subject } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
+    authHasChanged: Subject<void> = new Subject<void>();
     emptyLogin: Login = {
         username: "",
         password: ""
@@ -47,6 +49,7 @@ token: string = "";
             this.username = tokenInfo["username"];
             this.token = token;
             this.isAuthenticated = true;
+            this.authHasChanged.next();
             resolve();
         })
     }

@@ -3,6 +3,7 @@ import { UserService } from './services/user-service.service';
 import { AuthService } from './services/auth-service.service';
 import { TokenResponse } from './models/TokenResponse.model';
 import { Router } from '@angular/router';
+import { User } from './models/User.model';
 
 
 
@@ -55,6 +56,27 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.checkAuth();
+    this.subscribeAuthHasChanged();
+}
+
+subscribeAuthHasChanged() {
+    this.authService.authHasChanged.subscribe(() => {
+        this.getUsersForMap();
+    })
+}
+
+getUsersForMap() {
+    this.userService.getUsers().subscribe({
+    next: (res: User[]) =>{
+            this.userService.userMapping = {};
+            res.forEach((row, i)=>{
+                this.userService.userMapping[row.userId] = row.username;
+                if (i === res.length - 1){
+                    console.log(this.userService.userMapping);
+                }
+            })
+        }
+    })
 }
 
 goToMyProfile(){

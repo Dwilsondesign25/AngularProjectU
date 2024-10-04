@@ -6,6 +6,7 @@ import { AuthService } from "./auth-service.service";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
+    userMapping: any = {};
     colorHasChanged: Subject<string> = new Subject<string>();
     usersHaveChanged: Subject<boolean> = new Subject<boolean>();
     userList: User[] = [];
