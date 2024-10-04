@@ -5,6 +5,7 @@ import { UsersComponent } from "./users/users.component";
 import { UserSingleComponent } from "./users/user-single/user-single.component";
 import { RegisterComponent } from "./auth/register/register.component";
 import { authGaurd } from "./architecture/auth.gaurd.gaurd";
+import { PostsComponent } from "./posts/posts.component";
 // Removed the import statement for AppRoutingModule
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
             {path: "", component: UsersComponent, pathMatch: "full"},
             {path: ":userId", component: UserSingleComponent},
         ]},
+        {path: "posts", component: PostsComponent}
         {path: "**", redirectTo: "login"}
     ]},
     {path: "**", redirectTo: "login"},

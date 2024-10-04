@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthInterceptor } from './architecture/AuthInterceptor.interceptor';
+import { PostsComponent } from './posts/posts.component';
+import { PostSingleComponent } from './posts/post-single/post-single.component';
 
 
 // Import the HttpClientModule and provide the HttpClient interceptor
@@ -23,6 +25,8 @@ import { AuthInterceptor } from './architecture/AuthInterceptor.interceptor';
     UserSingleComponent,
     LoginComponent,
     RegisterComponent,
+    PostsComponent,
+    PostSingleComponent,
   ],
   imports: [
     BrowserModule,
