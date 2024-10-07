@@ -67,7 +67,7 @@ setUserForDisplay() {
 
 subscribeParams() {
     this.route.params.subscribe(params => {
-        console.log(params["userId"]);
+        // console.log(params["userId"]);
         if (params["userId"]){
             this.isSingleUser = true;
             this.userId = +params["userId"];

@@ -10,6 +10,7 @@ import { PostService } from '../services/post-service.service'; // Import PostSe
 })
 export class PostsComponent implements OnInit {
   @Input() userId: number = 0;
+  postsHaveChangedSubscription = new Subscription();
 
     constructor(
       public postService: PostService, // Changed PostService to postService
@@ -19,6 +20,13 @@ export class PostsComponent implements OnInit {
     ngOnInit(): void {
     this.postService.postList = [];
     this.getPosts();
+    this.subscribePostsHaveChanged();
+  }
+
+  subscribePostsHaveChanged(){
+    this.postsHaveChangedSubscription = this.postService.postsHaveChanged.subscribe(() =>{
+      this.getPosts();
+    });
   }
 
   getPosts(){
@@ -31,5 +39,9 @@ export class PostsComponent implements OnInit {
         })
       }
    })
+  }
+
+  ngOnDestroy(){
+    this.postsHaveChangedSubscription.unsubscribe();
   }
 }

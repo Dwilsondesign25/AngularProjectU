@@ -33,7 +33,7 @@ export class PostService {
 
     removePost(postId: number) {
         // this.userList.splice(index, 1);
-        if (confirm("Are you sure you want to delete this user?")) {
+        if (confirm("Are you sure you want to delete this post?")) {
             this.deletePost(postId).subscribe({
                 next: () =>{
                     alert("The delete was successful!");
@@ -41,21 +41,25 @@ export class PostService {
                 },
                 error: (err: any) =>{
                     console.log(err);
-                    alert("The user delete failed! Please try again later.");
+                    alert("The post delete failed! Please try again later.");
                 }
             })
         }
     }
 
-    updsertUser(post: Post) {
+    updsertPost(post: Post) {
+        let editType: string = "adding";
+        if (post.postId !==0){
+            editType = "Editing"
+        }
         this.postPost(post).subscribe({
             next: () =>{
-                alert("Adding a user was successful!");
+                alert(editType + " a post was successful!");
                 this.postsHaveChanged.next(false);
             },
             error: (err: any) =>{
                 console.log(err);
-                alert("Adding the user failed! Please try again later.");
+                alert(editType + " the post failed! Please try again later.");
             }
         })
     }

@@ -16,7 +16,7 @@ class="user-page-border">
                 Post Date: 
             </label>
             <div>
-                {{setDateForDisplay(post.postDate)}}
+                {{helperService.setDateForDisplay(post.postDate)}}
                 </div>
             </div>  
             @if(post.updateDate !== post.postDate){
@@ -25,7 +25,7 @@ class="user-page-border">
                         Update Date:
                     </label>
                     <div>
-                        {{setDateForDisplay(post.updateDate)}}
+                        {{helperService.setDateForDisplay(post.updateDate)}}
                         </div>
                     </div>
             }
@@ -33,10 +33,44 @@ class="user-page-border">
     </div>
 
     <div class="field-space">
-        <div>
-            {{post.postContent}}
+        @if(!editMode){
+            <div>
+                {{post.postContent}}
+                </div>
+        } @else {
+            <form (onSubmit="saveEdit()")>
+                <textarea name="postContent" 
+                class = "text-area-default"
+                [(ngModel)]="postForEdit.postContent"></textarea>
+            </form>
+        }
+        </div>
+        @if(post.userId === authService.userId && !editMode){
+            <div class="grid50">
+                <div></div>
+                <div class="grid50">
+                    <button class="field-space" (click)="postService.removePost(post.postId)">
+                    Delete
+                    </button>
+                    <button class="field-space" (click)="toggleEdit(true, post)">
+                    Edit
+                </button>
             </div>
         </div>
+        } @else if (editMode) {
+            <div class="grid50">
+                <div></div>
+                <div class="grid50">
+                    <button class="field-space" (click)="toggleEdit(false)">
+                    Cancel
+                    </button>
+                    <button class="field-space" (click)="saveEdit()">
+                    Save
+                </button>
+            </div>
+        </div>
+
+        }
     </div>
 
     

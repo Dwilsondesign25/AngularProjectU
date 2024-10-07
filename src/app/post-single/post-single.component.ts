@@ -1,29 +1,38 @@
 import { Component, Input } from '@angular/core';
-import * as PostModel from '../models/Post.model';
+import type { Post } from '../models/Post.model';
 import { PostService } from '../services/post-service.service';
 import { UserService } from '../services/user-service.service';
-import { DatePipe } from '@angular/common';
+import { HelperService } from '../services/helper-service.service';
+import { AuthService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-post-single',
   templateUrl: './post-single.component.html',
-  styleUrl: './post-single.component.css'
+  styleUrls: ['./post-single.component.css']
 })
 export class PostSingleComponent {
-  @Input() post: PostModel.Post;
-  datePipe: DatePipe = new DatePipe("en-US"); 
+  @Input() post: Post;
+  editMode: boolean = false;
+  postForEdit: Post;
+
   
   constructor(
     public postService: PostService,
     public userService: UserService,
+    public helperService: HelperService,
+    public authService: AuthService, 
   ) {
     this.post = {...this.postService.emptyPost};
+    this.postForEdit = {...this.postService.emptyPost};
   }
-  setDateForDisplay(dateToConvert: Date | string){
-    console.log(typeof dateToConvert);
-    if (typeof dateToConvert === 'string') {
-      dateToConvert = new Date(Date.parse(dateToConvert));
-    }
-    return this.datePipe.transform(dateToConvert, "MM/DD/YYYY hh:mm:ss a");
+
+  toggleEdit(editMode: boolean = false, postToEdit: Post = {...this.postService.emptyPost}){
+    this.editMode = editMode;
+    this.postForEdit = {...this.postForEdit};
+  }
+
+  saveEdit(){
+    this.editMode = false;
+    this.postService.updsertPost(this.postForEdit);
   }
 }

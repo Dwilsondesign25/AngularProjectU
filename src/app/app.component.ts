@@ -71,9 +71,9 @@ getUsersForMap() {
             this.userService.userMapping = {};
             res.forEach((row, i)=>{
                 this.userService.userMapping[row.userId] = row.username;
-                if (i === res.length - 1){
-                    console.log(this.userService.userMapping);
-                }
+                // if (i === res.length - 1){
+                //     console.log(this.userService.userMapping);
+                // }
             })
         }
     })
@@ -122,7 +122,7 @@ checkAuth(){
   }
 
   toggleContextMenu(showContextMenu: boolean, event: MouseEvent | null = null) {
-      console.log(event);
+    //   console.log(event);
       if (event !== null) {
           event.preventDefault();
           this.contextMenuInfo.pageX = event.pageX
@@ -153,7 +153,7 @@ checkAuth(){
       }
       this.tooltipInfo.pageX = event.pageX - 50;
       this.tooltipInfo.pageY = event.pageY + 15;
-      console.log(event);
+    //   console.log(event);
   }
 
   setShowUsers(showUsers: boolean) {
