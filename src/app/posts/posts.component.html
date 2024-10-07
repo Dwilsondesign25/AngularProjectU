@@ -1,11 +1,13 @@
 @if(postService.postList.length > 0) {
     @for (post of postService.postList; track $index){
-    <div>
+    <!-- <div>
         {{post.userId}}
     </div>
     <div>
         {{userService.userMapping[post.userId]}}
-    </div>
+    </div> -->
+    <app-post-single [post]="post">
+    </app-post-single>
 }
 } @else {
     <div> 
