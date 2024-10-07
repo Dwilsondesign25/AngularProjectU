@@ -1,1 +1,8 @@
-<p>posts works!</p>
+@if(postService.postList.length > 0) {
+    @for (post of postService.postlist; track $index){
+    <div>
+        {{post.postDate}}
+    </div>
+} @else {
+    <div> There are no posts for this user! </div>
+}

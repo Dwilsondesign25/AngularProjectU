@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from '../models/Post.model';
 
 @Component({
   selector: 'app-posts',
@@ -12,10 +13,15 @@ export class PostsComponent implements OnInit{
     ){ }
  
     ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.PostService.postList = [];
+    this.getPosts();
   }
 
   getPosts(){
-    this.PostService.getPosts().subscribe
+    this.PostService.getPosts().subscribe({
+      next: (res: Post[]) => {
+        this.PostService.postList = res;
+      }
+   })
   }
 }

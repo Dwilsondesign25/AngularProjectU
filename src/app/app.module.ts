@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthInterceptor } from './architecture/AuthInterceptor.interceptor';
 import { PostsComponent } from './posts/posts.component';
-import { PostSingleComponent } from './posts/post-single/post-single.component';
+import { PostSingleComponent } from './post-single/post-single.component';
 
 
 // Import the HttpClientModule and provide the HttpClient interceptor

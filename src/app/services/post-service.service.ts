@@ -24,9 +24,9 @@ export class PostService {
 
     getPosts(userId: number = 0) {
         if (userId === 0) {
-            return this.httpServ.get<User[]>("post/posts/false")
+            return this.httpServ.get<Post[]>("post/posts/false")
         } else {
-            return this.httpServ.get<User[]>("post/posts/true/" +  userId);
+            return this.httpServ.get<Post[]>("post/posts/true/" +  userId);
         }
     }
 
