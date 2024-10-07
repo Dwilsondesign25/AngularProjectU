@@ -2,6 +2,6 @@ export interface Post {
     postId: number;
     userId: number;
     postContent: string;
-    postDate: Date;
-    updateDate: Date;
+    postDate: Date | string;
+    updateDate: Date | string;
 }

@@ -1,26 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../models/Post.model';
+import { UserService } from '../services/user-service.service';
+import { PostService } from '../services/post-service.service'; // Import PostService
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrl: './posts.component.css'
+  styleUrls: ['./posts.component.css'] // Corrected styleUrl to styleUrls
 })
-export class PostsComponent implements OnInit{
+export class PostsComponent implements OnInit {
+  @Input() userId: number = 0;
 
     constructor(
-      public PostService: PostService
+      public postService: PostService, // Changed PostService to postService
+      public userService: UserService,
     ){ }
  
     ngOnInit(): void {
-    this.PostService.postList = [];
+    this.postService.postList = [];
     this.getPosts();
   }
 
   getPosts(){
-    this.PostService.getPosts().subscribe({
+    this.postService.getPosts(this.userId).subscribe({
       next: (res: Post[]) => {
-        this.PostService.postList = res;
+        this.postService.postList = res;
+        this.postService.postList.sort ((first: Post, second: Post) => 
+        {
+          return Date.parse(first.postDate as string) > Date.parse(second.postDate as string) ? -1 : 1
+        })
       }
    })
   }

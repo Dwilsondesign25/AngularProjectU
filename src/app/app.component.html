@@ -78,7 +78,10 @@
       <div class="spaced-bottom">
       <button (click)="authService.logout()">Log Out</button>
       <button class="spaced-left" (click)="goToMyProfile()">My Profile</button>
-      </div>
+      <button (click)="authService.logout()">Log Out</button>
+      <button class="spaced-left" (click)="goToPosts()">Posts</button>
+      <button class="spaced-left" (click)="goToUsers()">Users</button>
+</div>
       }
       <router-outlet></router-outlet>
 </div>

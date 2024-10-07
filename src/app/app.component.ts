@@ -83,6 +83,15 @@ goToMyProfile(){
     this.router.navigate(["user/", this.authService.userId]);
 }
 
+
+goToPosts(){
+    this.router.navigate(["posts"]);
+}
+
+goToUsers(){
+    this.router.navigate(["user"]);
+}
+
 checkAuth(){
     let token = localStorage.getItem("token");
     if (token){
