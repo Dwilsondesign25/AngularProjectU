@@ -1,5 +1,8 @@
 <div
 class="user-page-border">
+@if(!addMode){
+
+}
 <div class="grid50">
     <div class="field-space">
         <label class="bold-text">
@@ -33,7 +36,7 @@ class="user-page-border">
     </div>
 
     <div class="field-space">
-        @if(!editMode){
+        @if(!editMode && !addMode){
             <div>
                 {{post.postContent}}
                 </div>
@@ -45,7 +48,7 @@ class="user-page-border">
             </form>
         }
         </div>
-        @if(post.userId === authService.userId && !editMode){
+        @if(post.userId === authService.userId && !editMode && !addMode){
             <div class="grid50">
                 <div></div>
                 <div class="grid50">
@@ -57,7 +60,7 @@ class="user-page-border">
                 </button>
             </div>
         </div>
-        } @else if (editMode) {
+        } @else if (editMode || addMode) {
             <div class="grid50">
                 <div></div>
                 <div class="grid50">

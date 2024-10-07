@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../models/Post.model';
 import { UserService } from '../services/user-service.service';
 import { PostService } from '../services/post-service.service'; // Import PostService
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
@@ -10,6 +11,7 @@ import { PostService } from '../services/post-service.service'; // Import PostSe
 })
 export class PostsComponent implements OnInit {
   @Input() userId: number = 0;
+  addMode: boolean = false;
   postsHaveChangedSubscription = new Subscription();
 
     constructor(
@@ -24,9 +26,17 @@ export class PostsComponent implements OnInit {
   }
 
   subscribePostsHaveChanged(){
-    this.postsHaveChangedSubscription = this.postService.postsHaveChanged.subscribe(() =>{
-      this.getPosts();
+    this.postsHaveChangedSubscription = this.postService.postsHaveChanged
+    .subscribe((cancelled:boolean) =>{
+      this.addMode = false;
+      if(!cancelled){
+        this.getPosts();
+      }
     });
+  }
+
+  addNewPost(){
+    this.addMode = true;
   }
 
   getPosts(){

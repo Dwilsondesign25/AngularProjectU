@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth-service.service';
   styleUrls: ['./post-single.component.css']
 })
 export class PostSingleComponent {
+  @Input() addMode: boolean = false; 
   @Input() post: Post;
   editMode: boolean = false;
   postForEdit: Post;
@@ -24,6 +25,7 @@ export class PostSingleComponent {
   ) {
     this.post = {...this.postService.emptyPost};
     this.postForEdit = {...this.postService.emptyPost};
+    this.postService.postsHaveChanged.next(true);
   }
 
   toggleEdit(editMode: boolean = false, postToEdit: Post = {...this.postService.emptyPost}){
